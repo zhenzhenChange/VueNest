@@ -23,7 +23,7 @@
         后台管理
       </el-header>
       <el-main>
-        <routerView />
+        <routerView :key="$route.path" />
       </el-main>
     </el-container>
   </el-container>

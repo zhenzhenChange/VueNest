@@ -12,9 +12,10 @@ const routes: RouteConfig[] = [
     children: [
       { name: 'Home', path: '/', component: () => import('@/views/Home.vue') },
       {
-        name: 'CourseList',
-        path: '/courses/list',
-        component: () => import('@/views/Course/CourseList.vue')
+        name: 'CourseCrud',
+        path: '/:resource/list',
+        props: true,
+        component: () => import('@/components/ResourceCurd.vue')
       }
     ]
   }
