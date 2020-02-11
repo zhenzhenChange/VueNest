@@ -1,11 +1,11 @@
-import { Episode } from './models/episode.model'
-import { Course } from './models/course.model'
-import { User } from './models/user.model'
-import { Module, Global } from '@nestjs/common'
-import { DbService } from './db.service'
-import { TypegooseModule } from 'nestjs-typegoose'
+import { Episode } from './models/episode.model';
+import { Course } from './models/course.model';
+import { User } from './models/user.model';
+import { Module, Global } from '@nestjs/common';
+import { DbService } from './db.service';
+import { TypegooseModule } from 'nestjs-typegoose';
 
-const models = TypegooseModule.forFeature([User, Course, Episode])
+const models = TypegooseModule.forFeature([User, Course, Episode]);
 
 @Global()
 @Module({
@@ -14,11 +14,11 @@ const models = TypegooseModule.forFeature([User, Course, Episode])
       useCreateIndex: true,
       useNewUrlParser: true,
       useFindAndModify: false,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     }),
-    models
+    models,
   ],
   providers: [DbService],
-  exports: [DbService, models]
+  exports: [DbService, models],
 })
 export class DbModule {}

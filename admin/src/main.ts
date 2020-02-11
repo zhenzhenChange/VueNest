@@ -1,19 +1,14 @@
-import Vue from 'vue'
-import axios from 'axios'
-import router from './router'
+import Vue from 'vue';
+import axios from 'axios';
+import router from './router';
 
-import App from './App.vue'
+import App from './App.vue';
 
-import './plugins/avue.js'
-import './plugins/element'
+import './plugins/avue.js';
+import './plugins/element';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 
-Vue.prototype.$http = axios.create({
-  baseURL: 'http://localhost:3000'
-})
+Vue.prototype.$http = axios.create({ baseURL: 'http://localhost:3000' });
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+new Vue({ router, render: h => h(App) }).$mount('#app');

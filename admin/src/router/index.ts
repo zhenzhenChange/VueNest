@@ -1,8 +1,8 @@
-import Vue from 'vue'
-import VueRouter, { RouteConfig } from 'vue-router'
-import Main from '@/views/Main.vue'
+import Vue from 'vue';
+import VueRouter, { RouteConfig } from 'vue-router';
+import Main from '@/views/Main.vue';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes: RouteConfig[] = [
   {
@@ -15,14 +15,12 @@ const routes: RouteConfig[] = [
         name: 'CourseCrud',
         path: '/:resource/list',
         props: true,
-        component: () => import('@/components/ResourceCurd.vue')
-      }
-    ]
-  }
-]
+        component: () => import('@/components/ResourceCurd.vue'),
+      },
+    ],
+  },
+];
 
-const router = new VueRouter({
-  routes
-})
+const router = new VueRouter({ routes });
 
-export default router
+export default router;

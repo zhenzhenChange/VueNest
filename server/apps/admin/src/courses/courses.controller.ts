@@ -1,12 +1,12 @@
-import { Course } from './../../../../libs/db/src/models/course.model'
-import { Controller, Get } from '@nestjs/common'
-import { Crud } from 'nestjs-mongoose-crud'
-import { InjectModel } from 'nestjs-typegoose'
-import { ReturnModelType } from '@typegoose/typegoose'
-import { ApiTags } from '@nestjs/swagger'
+import { Course } from './../../../../libs/db/src/models/course.model';
+import { Controller, Get } from '@nestjs/common';
+import { Crud } from 'nestjs-mongoose-crud';
+import { InjectModel } from 'nestjs-typegoose';
+import { ReturnModelType } from '@typegoose/typegoose';
+import { ApiTags } from '@nestjs/swagger';
 
 @Crud({
-  model: Course
+  model: Course,
 })
 @ApiTags('课程')
 @Controller('courses')
@@ -19,8 +19,8 @@ export class CoursesController {
       title: '课程管理',
       column: [
         { prop: 'CourseName', label: '课程名称' },
-        { prop: 'CourseCover', label: '课程封面' }
-      ]
-    }
+        { prop: 'CourseCover', label: '课程封面' },
+      ],
+    };
   }
 }

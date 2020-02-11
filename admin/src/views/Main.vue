@@ -30,7 +30,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator'
+import { Vue, Component } from 'vue-property-decorator';
 
 @Component({})
 export default class Main extends Vue {
@@ -41,14 +41,14 @@ export default class Main extends Vue {
         menus: [
           { title: '首页', path: '/' },
           { title: '课程管理', path: '/courses/list' },
-          { title: '课时管理', path: '/episodes/list' }
-        ]
+          { title: '课时管理', path: '/episodes/list' },
+        ],
       },
       {
         title: '运营管理',
-        menus: [{ title: '用户管理', path: '/users/list' }]
-      }
-    ]
-  }
+        menus: [{ title: '用户管理', path: '/users/list' }],
+      },
+    ],
+  };
 }
 </script>
