@@ -1,12 +1,16 @@
 <template>
   <avue-crud
+    :page="page"
     v-show="option"
-    :data="data.data"
     :option="option"
+    :data="data.data"
     @row-del="remove"
     @row-save="create"
     @row-update="update"
+    @on-load="changePage"
+    @sort-change="onSort"
     @refresh-change="fetch"
+    @search-change="onSearch"
   />
 </template>
 
@@ -15,8 +19,11 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component({})
 export default class ResourceCurd extends Vue {
   @Prop(String) resource!: string;
-  data = {};
-  option = {};
+
+  data: any = {};
+  query: any = {};
+  option: any = {};
+  page: any = { total: 0 };
 
   created() {
     this.fetch();
@@ -24,12 +31,14 @@ export default class ResourceCurd extends Vue {
   }
 
   async fetch() {
-    const res = await this.$http.get(`${this.resource}`);
-    this.data = res.data;
+    const params = { query: this.query };
+    const { data } = await this.$http.get(`${this.resource}`, { params });
+    this.data = data;
+    this.page.total = data.total;
   }
   async fetchOption() {
-    const res = await this.$http.get(`${this.resource}/option`);
-    this.option = res.data;
+    const { data } = await this.$http.get(`${this.resource}/option`);
+    this.option = data;
   }
 
   async create(row, done, loading) {
@@ -56,6 +65,30 @@ export default class ResourceCurd extends Vue {
     await this.$http.delete(`${this.resource}/${row._id}`);
     this.$message.success('删除成功！');
     this.fetch();
+  }
+
+  async changePage({ pageSize, currentPage }) {
+    this.query.limit = pageSize;
+    this.query.page = currentPage;
+    this.fetch();
+  }
+
+  async onSort({ prop, order }) {
+    if (!order) {
+      this.query.sort = null;
+    } else {
+      this.query.sort = { [prop]: order === 'ascending' ? 1 : 0 };
+    }
+    this.fetch();
+  }
+
+  async onSearch(where, done) {
+    for (const key in where) {
+      where[key] = { $regex: where[key] };
+    }
+    this.query.where = where;
+    this.fetch();
+    done();
   }
 }
 </script>

@@ -18,8 +18,16 @@ export class CoursesController {
     return {
       title: '课程管理',
       column: [
-        { prop: 'CourseName', label: '课程名称' },
-        { prop: 'CourseCover', label: '课程封面' },
+        { prop: 'CourseName', label: '课程名称', sortable: true, search: true, row: true },
+        {
+          width: 120,
+          height: 'auto',
+          type: 'upload',
+          label: '课程封面',
+          action: 'upload',
+          prop: 'CourseCover',
+          listType: 'picture-img',
+        },
       ],
     };
   }

@@ -10,11 +10,16 @@ const models = TypegooseModule.forFeature([User, Course, Episode]);
 @Global()
 @Module({
   imports: [
-    TypegooseModule.forRoot('mongodb://localhost/MyNest', {
-      useCreateIndex: true,
-      useNewUrlParser: true,
-      useFindAndModify: false,
-      useUnifiedTopology: true,
+    TypegooseModule.forRootAsync({
+      useFactory() {
+        return {
+          uri: process.env.DB,
+          useCreateIndex: true,
+          useNewUrlParser: true,
+          useFindAndModify: false,
+          useUnifiedTopology: true,
+        };
+      },
     }),
     models,
   ],

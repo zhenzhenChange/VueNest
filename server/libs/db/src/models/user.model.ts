@@ -2,9 +2,7 @@ import { prop, modelOptions } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 @modelOptions({
-  schemaOptions: {
-    timestamps: true,
-  },
+  schemaOptions: { timestamps: true },
 })
 export class User {
   @ApiProperty({ description: '用户名', example: 'xiaozhenzhen' })
