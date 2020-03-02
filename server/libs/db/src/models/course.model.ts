@@ -3,7 +3,7 @@ import { prop, modelOptions, arrayProp, Ref } from '@typegoose/typegoose';
 import { ApiProperty } from '@nestjs/swagger';
 
 @modelOptions({
-  schemaOptions: { timestamps: true },
+  schemaOptions: { timestamps: true, toJSON: { virtuals: true } },
 })
 export class Course {
   @ApiProperty({ description: '课程名称' })
@@ -15,6 +15,10 @@ export class Course {
   CourseCover: string;
 
   @ApiProperty({ description: '课程课时' })
-  @arrayProp({ itemsRef: 'Episode' })
-  CourseEpisodes: Array<Ref<Episode>>;
+  @arrayProp({
+    ref: 'Episode',
+    localField: '_id',
+    foreignField: 'SubordinateCourse',
+  })
+  CourseEpisodes: Ref<Episode>[];
 }
