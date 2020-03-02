@@ -1,5 +1,5 @@
 import colors from 'vuetify/es5/util/colors';
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 dotenv.config();
 
 export default {
@@ -47,6 +47,7 @@ export default {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
     '@nuxtjs/pwa',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
@@ -56,6 +57,17 @@ export default {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {},
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: '/auth/login' },
+          logout: { url: '/auth/logout', method: 'post' },
+          user: { url: '/auth/user', method: 'get', propertyName: false },
+        },
+      },
+    },
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
