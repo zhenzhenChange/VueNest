@@ -1,16 +1,15 @@
 <template>
   <avue-crud
     :page="page"
-    v-show="option"
-    :option="option"
     :data="data.data"
+    :option="option"
+    @on-load="changePage"
     @row-del="remove"
     @row-save="create"
     @row-update="update"
-    @on-load="changePage"
     @sort-change="onSort"
-    @refresh-change="fetch"
     @search-change="onSearch"
+    @refresh-change="fetch"
   />
 </template>
 
@@ -21,9 +20,9 @@ export default class ResourceCurd extends Vue {
   @Prop(String) resource!: string;
 
   data: any = {};
+  page: any = { total: 0 };
   query: any = {};
   option: any = {};
-  page: any = { total: 0 };
 
   created() {
     this.fetch();
@@ -68,8 +67,8 @@ export default class ResourceCurd extends Vue {
   }
 
   async changePage({ pageSize, currentPage }) {
-    this.query.limit = pageSize;
     this.query.page = currentPage;
+    this.query.limit = pageSize;
     this.fetch();
   }
 
